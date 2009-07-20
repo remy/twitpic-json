@@ -4,7 +4,7 @@ A twitpic JSON API to get your photos back out.
 
 I built this out of frustration with the current Twitpic API, that you can only upload your images. 
 
-This content belongs to us, so we should be able to port it else where if we wish.
+This content belongs to us, so we should be able to port it elsewhere if we wish.
 
 ## Usage
 
