@@ -10,6 +10,7 @@ This content belongs to us, so we should be able to port it else where if we wis
 
 * http://twitpicapi.appspot.com/rem
 * http://twitpicapi.appspot.com/rem?callback=mypics
+* http://twitpicapi.appspot.com/rem?callback=mypics&page=2
 
 ## Example
 

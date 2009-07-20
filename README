@@ -6,6 +6,7 @@ A twitpic JSON API to get your photos back out.
 
 * http://twitpicapi.appspot.com/rem
 * http://twitpicapi.appspot.com/rem?callback=mypics
+* http://twitpicapi.appspot.com/rem?callback=mypics&page=2
 
 ## Example
 
