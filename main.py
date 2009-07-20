@@ -30,9 +30,10 @@ class twitpicapi(webapp.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/javascript'
         callback = self.request.get('callback', default_value='')
+        page = self.request.get('page', default_value='0')
         self.user = self.request.path[1:]
         
-        self.loadTwitPicPage(0)
+        self.loadTwitPicPage(page)
         
         json = []
         for j in self.ids:
@@ -46,7 +47,7 @@ class twitpicapi(webapp.RequestHandler):
 
     def loadTwitPicPage(self, page):
         url = ""
-        if page != 0:
+        if page > 1:
             url = 'http://twitpic.com/photos/%s?page=%s' % (self.user, page)
         else:
             url = 'http://twitpic.com/photos/%s' % (self.user)
@@ -66,16 +67,17 @@ class twitpicapi(webapp.RequestHandler):
             else:
                 json['url'] = json['twitpic_url']
         
-            json['title'] = ''
-            if (photowrapper.find('div', { 'class' : 'profile-photo-message' }) is not None):
-                json['title'] = photowrapper.find('div', { 'class' : 'profile-photo-message' }).contents[0].strip()
-        
             # required to get the date - sucks that they don't maintain the date on the image URL
             twitpicPage = urllib2.urlopen('http://twitpic.com/' + json['id'])
             twitpicPageSoup = BeautifulSoup(twitpicPage)
             meta = twitpicPageSoup.find('div', { "id" : "photo-info" }).find('div').contents[0].strip() # grab the first nest div
             date = time.strptime(meta,"Posted on %B %d, %Y")
             json['date'] = time.strftime("%Y-%m-%d", date)
+
+            json['title'] = ''
+            if (twitpicPageSoup.find('div', { 'id' : 'view-photo-caption' }) is not None):
+                json['title'] = twitpicPageSoup.find('div', { 'id' : 'view-photo-caption' }).contents[0].strip()
+
             self.ids.append(json)
         
         # if soup.find(text=re.compile("OLDER")):
@@ -88,7 +90,7 @@ class Http404Page(webapp.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         self.error(404)
-        self.response.out.write(render('404.html', {
+        self.response.out.write(render('index.html', {
             'path': self.request.path,
         }))
 

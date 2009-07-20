@@ -19,11 +19,13 @@ section, header, footer {
 #wrapper {
   width: 600px;
   margin: 0 auto;
-  background: #fff url(http://html5demos.com/images/shade.jpg) repeat-x center bottom;
+  background: #fff; /* url(http://html5demos.com/images/shade.jpg) repeat-x center bottom;*/
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-top: 1px solid #fff;
-  padding-bottom: 76px;
+  padding-bottom: 20px;
+  -webkit-box-shadow: 0 0 20px #666;
+  -moz-box-shadow: 0 0 20px #666;
 }
 
 h1 {
@@ -81,10 +83,17 @@ abbr[title] {
     </header>
     <article>
       <p>A twitpic JSON API to <em>get</em> your photos back out.</p>
+      <p>I built this out of frustration with the current Twitpic API, that you can only upload your images.</p>
+      <p>This content belongs to us, so we should be able to port it else where if we wish.</p>
+      
+      <p>Note that I've not run a lot of testing on this API, and if you spot and error, drop me an <a href="http://github.com/remy/Twitpic-JSON-API/issues">issue report</a>.</p>
+
       <h2>Usage</h2>
+      <p>I've limited the results to one page per hit - i.e. 10 results from Twitpic, otherwise it can take ages to return. Pass in the page param to get the next page.</p>
       <ul>
         <li>http://twitpicapi.appspot.com/rem</li>
         <li>http://twitpicapi.appspot.com/rem?callback=mypics</li>
+        <li>http://twitpicapi.appspot.com/rem?callback=mypics&amp;page=2</li>
       </ul>
       <h2>Example</h2>
       <pre><code>[{ 
@@ -94,6 +103,8 @@ abbr[title] {
   date: '2009-09-13',
   title: 'My birthday pic'
 }]</code></pre>
+      <h2>Open Source</h2>
+      <p>All the code is available on <a href="http://github.com/remy/Twitpic-JSON-API">GitHub</a>, so feel free to fork and contribute.</p>
     </article>
     <footer><a href="http://twitter.com/rem">@rem built this</a></footer>
 </section>
